@@ -1,0 +1,5 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../lib/internal/Magento/Framework/View/Layout/etc/page_configuration.xsd" layout="1column">
+    <body>
+        <block class="Godogi\Livechat\Block\Chat" name="live.chat" template="chat.phtml" />
+    </body>
+</page>
