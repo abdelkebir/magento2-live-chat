@@ -38,7 +38,7 @@ class InstallSchema implements InstallSchemaInterface
 	        'Created At'
 	    )->addColumn(
             'is_admin',
-            Table::TYPE_BOOLEAN,
+            \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
             null,
             ['nullable' => false],
             'Is Admin?'
