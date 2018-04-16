@@ -1,5 +1,33 @@
 #livechat {
 	position: fixed;
-	bottom: 10px;
+	bottom: 0px;
 	right: 10px;
+	background-color: white;
+	border-radius: 4px 4px 0 0;
+	border: 1px solid #6e716e;
+	border-bottom: unset;
+	height: 260px;
+	width: 260px;
+}
+#livechat.closed {
+	bottom: -220px;
+}
+#livechat .title::after {
+	font-size: 22px;
+	line-height: 22px;
+	color: #757575;
+	content: '\e622';
+	font-family: 'luma-icons';
+	display: inline-block;
+	float: right;
+}
+#livechat.closed .title::after {
+	content: '\e621';
+}
+#livechat .title {
+	padding: 10px;
+	cursor: pointer;
+}
+#livechat .discussion {
+	padding: 10px;
 }

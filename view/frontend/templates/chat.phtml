@@ -1,13 +1,19 @@
-<div id="livechat">
+<div id="livechat" class="closed">
 	<div class="title">
 		Contact Us
 	</div>
 	<div class="discussion">
-		<textarea placeholder="What do you need?">
-			
-		</textarea> 
+		<textarea placeholder="What do you need?"></textarea> 
 	</div>
 </div>
 <script type="text/javascript">
-	
+	require(['jquery'], function($){ 
+     	$('#livechat .title').click(function(){
+     		if($('#livechat').hasClass('closed')){
+     			$('#livechat').removeClass('closed');
+     		}else{
+     			$('#livechat').addClass('closed');
+     		}
+     	})
+ 	});
 </script>
