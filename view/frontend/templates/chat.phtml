@@ -3,7 +3,12 @@
 		Contact Us
 	</div>
 	<div class="discussion">
-		<textarea placeholder="What do you need?"></textarea> 
+		<form id="livechatform" action="<?php echo $this->getFormAction(); ?>" type="post">
+			<textarea placeholder="<?php echo __('What do you need?'); ?>"></textarea> 
+			<button type="submit" title="Submit" class="action submit primary">
+	            <span><?php echo __('Submit'); ?></span>
+	        </button>
+		</form>
 	</div>
 </div>
 <script type="text/javascript">
@@ -15,5 +20,22 @@
      			$('#livechat').addClass('closed');
      		}
      	})
+     	$("#livechatform").submit(function(e) {
+		    var url = "<?php echo $this->getFormAction(); ?>";
+		    $.ajax({
+	           	type: "POST",
+	           	url: url,
+	           	data: $("#livechatform").serialize(),
+	           	success: function(data){
+	           		console.log('Success!');
+	               	console.log(data);
+	           	},
+	            error: function (data) {
+	                console.log('An error occurred.');
+	                console.log(data);
+	            }
+		    });
+		    e.preventDefault();
+		});
  	});
 </script>
