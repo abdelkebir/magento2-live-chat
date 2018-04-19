@@ -1,10 +1,11 @@
 <div id="livechat" class="closed">
 	<div class="title">
-		Contact Us
+		<?php echo __('Contact Us'); ?>
 	</div>
 	<div class="discussion">
+		<div id="livedisc"></div>
 		<form id="livechatform" action="<?php echo $this->getFormAction(); ?>" type="post">
-			<textarea placeholder="<?php echo __('What do you need?'); ?>"></textarea> 
+			<textarea id="message" name="message" placeholder="<?php echo __('What do you need?'); ?>"></textarea> 
 			<button type="submit" title="Submit" class="action submit primary">
 	            <span><?php echo __('Submit'); ?></span>
 	        </button>
@@ -27,6 +28,9 @@
 	           	url: url,
 	           	data: $("#livechatform").serialize(),
 	           	success: function(data){
+	           		var message = $('#message').val();
+	           		$('#livedisc').append('<div class="message customer">'+message+'</div>');
+	           		$('#message').val('');
 	           		console.log('Success!');
 	               	console.log(data);
 	           	},
