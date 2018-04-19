@@ -12,6 +12,6 @@ class Chat extends \Magento\Framework\View\Element\Template
 	}
 
 	public function getFormAction(){
-		return $this->_storeManager->getStore()->getUrl('livechat/comment/send');
+		return $this->_storeManager->getStore()->getUrl('livechat/message/send');
 	}
 }

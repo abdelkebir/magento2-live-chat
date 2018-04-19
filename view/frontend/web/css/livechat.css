@@ -30,4 +30,20 @@
 }
 #livechat .discussion {
 	padding: 10px;
+	max-height: 199px;
+	overflow-y: scroll;
+}
+.message.customer {
+	border-radius: 3px;
+	padding: 4px 10px;
+}
+#livedisc .message.customer{
+	border: 1px solid #99c2ff;
+	background-color: #b3d1ff;
+	margin: 4px 20px 4px 0;
+}
+#livedisc .message.admin{
+	border: 1px solid #ffb3ff;
+	background-color: #ffccff;
+	margin: 4px 0px 4px 20;
 }
