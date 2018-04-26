@@ -4,13 +4,10 @@
 	</div>
 	<div class="discussion">
 		<div id="livedisc"></div>
-		<form id="livechatform" action="<?php echo $this->getFormAction(); ?>" type="post">
-			<textarea id="message" name="message" placeholder="<?php echo __('What do you need?'); ?>"></textarea> 
-			<button type="submit" title="Submit" class="action submit primary">
-	            <span><?php echo __('Submit'); ?></span>
-	        </button>
-		</form>
 	</div>
+	<form id="livechatform" action="<?php echo $this->getFormAction(); ?>" type="post">
+		<textarea id="message" name="message" placeholder="<?php echo __('Type and press [enter]'); ?>"></textarea> 
+	</form>
 </div>
 <script type="text/javascript">
 	require(['jquery'], function($){ 
@@ -21,6 +18,12 @@
      			$('#livechat').addClass('closed');
      		}
      	})
+     	$('#message').keypress(function (e) {
+		  	if (e.which == 13) {
+		    	$('#livechatform').submit();
+		    	return false;
+		  	}
+		});
      	$("#livechatform").submit(function(e) {
 		    var url = "<?php echo $this->getFormAction(); ?>";
 		    $.ajax({
