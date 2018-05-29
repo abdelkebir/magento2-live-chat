@@ -2,7 +2,7 @@
 	<div class="title">
 		<?php echo __('Contact Us'); ?>
 	</div>
-	<div class="discussion">
+	<div id="discussion">
 		<div id="livedisc"></div>
 	</div>
 	<form id="livechatform" action="<?php echo $this->getFormAction(); ?>" type="post">
@@ -34,6 +34,8 @@
 	           		var message = $('#message').val();
 	           		$('#livedisc').append('<div class="message customer">'+message+'</div>');
 	           		$('#message').val('');
+	           		$('#livedisc').animate({bottom: 0});
+	           		changeProportions();
 	           		console.log('Success!');
 	               	console.log(data);
 	           	},
@@ -44,5 +46,22 @@
 		    });
 		    e.preventDefault();
 		});
+		function changeProportions(){
+			var liveDiscussionHeight = $('#livedisc').height();
+			console.log('liveDiscussionHeight='+liveDiscussionHeight);
+			var proportion = liveDiscussionHeight / 230;
+			console.log('proportion='+proportion);
+			if (proportion < 1){
+				console.log('proportion < 1');
+			}else{
+				console.log('proportion >= 1');
+				if($('#discussion').find('.scrollBar').length !== 0){
+					console.log('#discussion has .scrollBar');
+				}else{
+					console.log('#discussion doesn\'t have .scrollBar');
+					$('#discussion').prepend('<div class="scrollBar"><div class="slider"></div></div>');
+				}
+			}
+		}
  	});
 </script>
