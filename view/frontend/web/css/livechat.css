@@ -9,6 +9,22 @@
 	z-index: 1000;
 	border: 2px solid #C8C8C8;
 }
+#livechat .scrollBar {
+	background: #49505a;
+	position: sticky;
+	width: 10px;
+	height: 230px;
+	z-index: 100;
+	top: 0px;
+	left: calc(100% - 10px);
+}
+#livechat .slider {
+	background: #5EAEE3;
+	width: 10px;
+	border-radius: 10px;
+	left: 0px;
+	height: 30px;
+}
 #livechat.closed {
 	bottom: -302px;
 }
@@ -28,11 +44,12 @@
 	padding: 10px;
 	cursor: pointer;
 }
-#livechat .discussion {
-	padding: 10px;
-	max-height: 210px;
-	overflow-y: scroll;
+#livechat #discussion {
+	padding: 0px;
+	height: 230px;
+	overflow-y: hidden;
 	background-color: #f8f8f8;
+	position: relative;
 }
 #livechat .message.customer {
 	padding: 4px 10px;
@@ -63,4 +80,22 @@
 	border: unset;
 	background: unset;
 	font-style: italic;
+}
+#livechat #livedisc {
+	display: inline-block;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+#livechat #discussion::-webkit-scrollbar,#livechat #discussion::scrollbar {
+    width: 20px;
+}
+#livechat #discussion::-webkit-scrollbar-track,#livechat #discussion::scrollbar-track {
+    background: #f1f1f1; 
+}
+#livechat #discussion::-webkit-scrollbar-thumb,#livechat #discussion::scrollbar-thumb {
+    background: #888; 
+}
+#livechat #discussion::-webkit-scrollbar-thumb:hover,#livechat #discussion::scrollbar-thumb:hover {
+    background: #555; 
 }
