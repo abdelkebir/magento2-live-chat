@@ -1,40 +1,40 @@
-<div id="livechat" class="closed">
+<div id="lc-livechat" class="closed">
 	<div class="title">
 		<?php echo __('Contact Us'); ?>
 	</div>
-	<div id="discussion">
-		<div id="livedisc"></div>
+	<div id="lc-discussion">
+		<div id="lc-livedisc"></div>
 	</div>
-	<form id="livechatform" action="<?php echo $this->getFormAction(); ?>" type="post">
-		<textarea id="message" name="message" placeholder="<?php echo __('Type and press [enter]'); ?>"></textarea> 
+	<form id="lc-livechatform" action="<?php echo $this->getFormAction(); ?>" type="post">
+		<textarea id="lc-message" name="message" placeholder="<?php echo __('Type and press [enter]'); ?>"></textarea> 
 	</form>
 </div>
 <script type="text/javascript">
 	require(['jquery'], function($){ 
-     	$('#livechat .title').click(function(){
-     		if($('#livechat').hasClass('closed')){
-     			$('#livechat').removeClass('closed');
+     	$('#lc-livechat .title').click(function(){
+     		if($('#lc-livechat').hasClass('closed')){
+     			$('#lc-livechat').removeClass('closed');
      		}else{
-     			$('#livechat').addClass('closed');
+     			$('#lc-livechat').addClass('closed');
      		}
      	})
-     	$('#message').keypress(function (e) {
+     	$('#lc-message').keypress(function (e) {
 		  	if (e.which == 13) {
-		    	$('#livechatform').submit();
+		    	$('#lc-livechatform').submit();
 		    	return false;
 		  	}
 		});
-     	$("#livechatform").submit(function(e) {
+     	$("#lc-livechatform").submit(function(e) {
 		    var url = "<?php echo $this->getFormAction(); ?>";
 		    $.ajax({
 	           	type: "POST",
 	           	url: url,
-	           	data: $("#livechatform").serialize(),
+	           	data: $("#lc-livechatform").serialize(),
 	           	success: function(data){
-	           		var message = $('#message').val();
-	           		$('#livedisc').append('<div class="message customer">'+message+'</div>');
-	           		$('#message').val('');
-	           		$('#livedisc').animate({bottom: 0});
+	           		var message = $('#lc-message').val();
+	           		$('#lc-livedisc').append('<div class="message customer">'+message+'</div>');
+	           		$('#lc-message').val('');
+	           		$('#lc-livedisc').animate({bottom: 0});
 	           		changeProportions();
 	           		console.log('Success!');
 	               	console.log(data);
@@ -47,20 +47,46 @@
 		    e.preventDefault();
 		});
 		function changeProportions(){
-			var liveDiscussionHeight = $('#livedisc').height();
-			console.log('liveDiscussionHeight='+liveDiscussionHeight);
-			var proportion = liveDiscussionHeight / 230;
-			console.log('proportion='+proportion);
-			if (proportion < 1){
-				console.log('proportion < 1');
+			var L = $('#lc-livedisc').height();
+			var l = 230;
+
+			var H = 230;
+			var h = 0;
+
+
+			console.log('L='+L);
+			var p = L / l; //   p = Proportion
+			console.log('p='+p);
+
+			if (p <= 1){
+				console.log('p <= 1');
 			}else{
-				console.log('proportion >= 1');
-				if($('#discussion').find('.scrollBar').length !== 0){
-					console.log('#discussion has .scrollBar');
+				console.log('p > 1');
+				if($('#lc-discussion').find('#lc-scrollBar').length !== 0){
+					console.log('#lc-discussion has #lc-scrollBar');
+					setAppropriateScrollbarHeight();
 				}else{
-					console.log('#discussion doesn\'t have .scrollBar');
-					$('#discussion').prepend('<div class="scrollBar"><div class="slider"></div></div>');
+					console.log('#lc-discussion doesn\'t have #lc-scrollBar');
+					$('#lc-discussion').prepend('<div id="lc-scrollBar"><div id="lc-slider"></div></div>');
+					setAppropriateScrollbarHeight()
 				}
+			}
+		}
+		function setAppropriateScrollbarHeight(){
+			var L = $('#lc-livedisc').height();
+			var l = 230;
+
+			var H = 230;
+			var h = 0;
+
+
+			h = (H*l)/L;
+			if(h < 10){
+				$('#lc-slider').height(10);
+				$('#lc-slider').css('top', (H-10) + 'px');
+			}else{
+				$('#lc-slider').height(h);
+				$('#lc-slider').css('top', (H-h) + 'px');
 			}
 		}
  	});

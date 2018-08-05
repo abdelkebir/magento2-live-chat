@@ -1,4 +1,4 @@
-#livechat {
+#lc-livechat {
 	position: fixed;
 	bottom: 0px;
 	right: 10px;
@@ -9,7 +9,7 @@
 	z-index: 1000;
 	border: 2px solid #C8C8C8;
 }
-#livechat .scrollBar {
+#lc-livechat #lc-scrollBar {
 	background: #49505a;
 	position: sticky;
 	width: 10px;
@@ -18,17 +18,18 @@
 	top: 0px;
 	left: calc(100% - 10px);
 }
-#livechat .slider {
+#lc-livechat #lc-slider {
 	background: #5EAEE3;
 	width: 10px;
 	border-radius: 10px;
 	left: 0px;
 	height: 30px;
+	position: relative;
 }
-#livechat.closed {
+#lc-livechat.closed {
 	bottom: -302px;
 }
-#livechat .title::after {
+#lc-livechat .title::after {
 	font-size: 22px;
 	line-height: 22px;
 	color: #757575;
@@ -37,24 +38,24 @@
 	display: inline-block;
 	float: right;
 }
-#livechat.closed .title::after {
+#lc-livechat.closed .title::after {
 	content: '\e621';
 }
-#livechat .title {
+#lc-livechat .title {
 	padding: 10px;
 	cursor: pointer;
 }
-#livechat #discussion {
+#lc-livechat #lc-discussion {
 	padding: 0px;
 	height: 230px;
 	overflow-y: hidden;
 	background-color: #f8f8f8;
 	position: relative;
 }
-#livechat .message.customer {
+#lc-livechat .message.customer {
 	padding: 4px 10px;
 }
-#livechat #livedisc .message.customer {
+#lc-livechat #lc-livedisc .message.customer {
 	background-color: #77a0c7;
 	margin: 4px 20px 4px 0;
 	border-radius: 0 14px 14px;
@@ -63,39 +64,39 @@
 	font-weight: 600;
 	overflow-wrap: break-word;
 }
-#livechat #livedisc .message.admin{
+#lc-livechat #lc-livedisc .message.admin{
 	border: 1px solid #ffb3ff;
 	background-color: #ffccff;
 	margin: 4px 0px 4px 20;
 }
 
-#livechat #livechatform{
+#lc-livechat #lc-livechatform{
 	position: absolute;
 	bottom: 0;
 	width: 100%;
 	height: 70px;
 	border-top: 1px solid #eee;
 }
-#livechat #message {
+#lc-livechat #lc-message {
 	border: unset;
 	background: unset;
 	font-style: italic;
 }
-#livechat #livedisc {
+#lc-livechat #lc-livedisc {
 	display: inline-block;
 	width: 100%;
 	position: absolute;
 	bottom: 0;
 }
-#livechat #discussion::-webkit-scrollbar,#livechat #discussion::scrollbar {
+#lc-livechat #lc-discussion::-webkit-scrollbar,#lc-livechat #lc-discussion::scrollbar {
     width: 20px;
 }
-#livechat #discussion::-webkit-scrollbar-track,#livechat #discussion::scrollbar-track {
+#lc-livechat #lc-discussion::-webkit-scrollbar-track,#lc-livechat #lc-discussion::scrollbar-track {
     background: #f1f1f1; 
 }
-#livechat #discussion::-webkit-scrollbar-thumb,#livechat #discussion::scrollbar-thumb {
+#lc-livechat #lc-discussion::-webkit-scrollbar-thumb,#lc-livechat #lc-discussion::scrollbar-thumb {
     background: #888; 
 }
-#livechat #discussion::-webkit-scrollbar-thumb:hover,#livechat #discussion::scrollbar-thumb:hover {
+#lc-livechat #lc-discussion::-webkit-scrollbar-thumb:hover,#lc-livechat #lc-discussion::scrollbar-thumb:hover {
     background: #555; 
 }
