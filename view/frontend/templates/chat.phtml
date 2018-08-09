@@ -49,11 +49,8 @@
 		function changeProportions(){
 			var L = $('#lc-livedisc').height();
 			var l = 230;
-
 			var H = 230;
 			var h = 0;
-
-
 			console.log('L='+L);
 			var p = L / l; //   p = Proportion
 			console.log('p='+p);
@@ -68,7 +65,23 @@
 				}else{
 					console.log('#lc-discussion doesn\'t have #lc-scrollBar');
 					$('#lc-discussion').prepend('<div id="lc-scrollBar"><div id="lc-slider"></div></div>');
-					setAppropriateScrollbarHeight()
+					setAppropriateScrollbarHeight();
+					$("#lc-scrollBar").mousedown(function(e){
+					    var cursorY = e.clientY || window.event.clientY;
+					    var scrollBarYPosition = $('#lc-scrollBar')[0].getBoundingClientRect().top;
+
+					    var difference = cursorY - scrollBarYPosition;
+
+					    var lcSliderHeight = document.getElementById('lc-slider').clientHeight;
+
+					    if((lcSliderHeight/2) >= difference){
+					    	$('#lc-slider').css('top', 0 + 'px');
+					    }else{
+					    	$('#lc-slider').css('top', (difference - (lcSliderHeight/2))  + 'px');
+					    }
+
+					    $('.page-title').html('cursorY = '+cursorY+'<br> scrollBarYPosition = '+scrollBarYPosition+'<br> cursorY - scrollBarYPosition = '+(cursorY - scrollBarYPosition));
+					});
 				}
 			}
 		}
