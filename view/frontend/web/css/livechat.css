@@ -18,14 +18,24 @@
 	top: 0px;
 	left: calc(100% - 10px);
 }
+#lc-scrollBar:hover{
+	width: 20px;
+	left: calc(100% - 20px);
+	-webkit-transition: width 2s; /* Safari */
+    transition: width 2s;
+    -webkit-transition: left 2s; /* Safari */
+    transition: left 2s;
+}
 #lc-livechat #lc-slider {
 	background: #5EAEE3;
-	width: 10px;
 	border-radius: 10px;
 	left: 0px;
 	height: 30px;
 	position: relative;
 	cursor: grab;
+}
+#lc-livechat #lc-slider.grabbing {
+	cursor: grabbing;
 }
 #lc-livechat.closed {
 	bottom: -302px;
