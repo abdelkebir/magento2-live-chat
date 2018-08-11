@@ -51,36 +51,52 @@
 			var l = 230;
 			var H = 230;
 			var h = 0;
-			console.log('L='+L);
 			var p = L / l; //   p = Proportion
-			console.log('p='+p);
-
 			if (p <= 1){
-				console.log('p <= 1');
 			}else{
-				console.log('p > 1');
 				if($('#lc-discussion').find('#lc-scrollBar').length !== 0){
-					console.log('#lc-discussion has #lc-scrollBar');
 					setAppropriateScrollbarHeight();
 				}else{
-					console.log('#lc-discussion doesn\'t have #lc-scrollBar');
 					$('#lc-discussion').prepend('<div id="lc-scrollBar"><div id="lc-slider"></div></div>');
 					setAppropriateScrollbarHeight();
-					$("#lc-scrollBar").mousedown(function(e){
-					    var cursorY = e.clientY || window.event.clientY;
-					    var scrollBarYPosition = $('#lc-scrollBar')[0].getBoundingClientRect().top;
+					var isDragging = false;
+					var scrollClicked = false;
 
-					    var difference = cursorY - scrollBarYPosition;
+					$("#lc-scrollBar").mousedown(function(e) {
+						scrollClicked = true;
+						$('#lc-slider').addClass('grabbing');
+					});
+					$("#lc-scrollBar").mousemove(function(e){
+						isDragging = true;
+						if(isDragging && scrollClicked){
+					        var cursorY = e.clientY || window.event.clientY;
+						    var scrollBarYPosition = $('#lc-scrollBar')[0].getBoundingClientRect().top;
+						    var difference = cursorY - scrollBarYPosition;
+						    var lcSliderHeight = document.getElementById('lc-slider').clientHeight;
 
-					    var lcSliderHeight = document.getElementById('lc-slider').clientHeight;
+						    var L = $('#lc-livedisc').height();
+							var l = 230;
+							var diffL = L -l;
 
-					    if((lcSliderHeight/2) >= difference){
-					    	$('#lc-slider').css('top', 0 + 'px');
-					    }else{
-					    	$('#lc-slider').css('top', (difference - (lcSliderHeight/2))  + 'px');
-					    }
-
-					    $('.page-title').html('cursorY = '+cursorY+'<br> scrollBarYPosition = '+scrollBarYPosition+'<br> cursorY - scrollBarYPosition = '+(cursorY - scrollBarYPosition));
+						    if((lcSliderHeight/2) >= difference){  // top
+						    	$('#lc-slider').css('top', 0 + 'px');
+						    	$('#lc-livedisc').css('bottom', '-' + diffL + 'px');
+						    	console.log( '-' + diffL + 'px');
+						    }else if((230 - (lcSliderHeight/2)) <= difference){  //bottom
+						    	$('#lc-slider').css('top', (230 - lcSliderHeight) + 'px');
+						    	$('#lc-livedisc').css('bottom', 0 + 'px');
+						    	console.log( 0 + 'px');
+						    }else{ // middle
+						    	$('#lc-slider').css('top', (difference - (lcSliderHeight/2))  + 'px');
+						    	$('#lc-livedisc').css('bottom', '-' + (L-(l/2)-(L*(difference/l))) + 'px');
+						    	console.log( '-' + (L-(l/2)-(L*(difference/l))) + 'px');
+						    }
+						}
+				    });
+				    $("#lc-scrollBar").mouseup(function() {
+					    isDragging = false;
+					    scrollClicked = false;
+					    $('#lc-slider').removeClass('grabbing');
 					});
 				}
 			}
@@ -88,11 +104,8 @@
 		function setAppropriateScrollbarHeight(){
 			var L = $('#lc-livedisc').height();
 			var l = 230;
-
 			var H = 230;
 			var h = 0;
-
-
 			h = (H*l)/L;
 			if(h < 10){
 				$('#lc-slider').height(10);
