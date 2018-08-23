@@ -1,5 +1,19 @@
 <?php 
 
-echo 'Livechat Dashboard';
+$sessions = $this->getSessions();
+
+foreach ($sessions as $session) {
+	echo '---------------------------------------------------<br>';
+	echo 'Session ID: '. $session->getSessionId().'<br>';
+	$discussions = $this->getDiscussions($session->getSessionId());
+	$i=1;
+	foreach ($discussions as $discussion) {
+		echo $i .'- <br>';
+		echo 'Message: '.$discussion->getMessage().'<br>';
+		echo '(C-A):'.$discussion->getCreatedAt().'<br>';
+		$i++;
+	}
+	echo '---------------------------------------------------<br>';
+}
 
 ?>
