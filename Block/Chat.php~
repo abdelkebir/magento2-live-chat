@@ -1,5 +1,5 @@
 <?php
-namespace Godogi\LiveChat\Block;
+namespace Godogi\Livechat\Block;
 class Chat extends \Magento\Framework\View\Element\Template
 {
 	public $_storeManager;

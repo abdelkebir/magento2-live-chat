@@ -1,5 +1,5 @@
 <?php
-namespace Godogi\LiveChat\Controller\Adminhtml\Index;
+namespace Godogi\Livechat\Controller\Adminhtml\Index;
  
 class Index extends \Magento\Backend\App\Action
 {

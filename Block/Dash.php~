@@ -7,7 +7,7 @@ class Dash extends \Magento\Framework\View\Element\Template
 
 	public function __construct(\Magento\Framework\View\Element\Template\Context $context,
 								\Magento\Store\Model\StoreManagerInterface $storeManager,
-								\Godogi\LiveChat\Model\ResourceModel\Message\CollectionFactory $livechatFactory)
+								\Godogi\Livechat\Model\ResourceModel\Message\CollectionFactory $livechatFactory)
 	{
 		$this->_storeManager = $storeManager;
 		$this->_livechatFactory = $livechatFactory;

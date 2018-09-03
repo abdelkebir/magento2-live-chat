@@ -10,6 +10,6 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
 	 */
 	protected function _construct()
 	{
-		$this->_init('Godogi\LiveChat\Model\Message', 'Godogi\LiveChat\Model\ResourceModel\Message');
+		$this->_init('Godogi\LiveChat\Model\Message', 'Godogi\Livechat\Model\ResourceModel\Message');
 	}
 }
