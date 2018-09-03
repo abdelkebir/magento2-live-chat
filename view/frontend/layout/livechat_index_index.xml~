@@ -7,12 +7,12 @@
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd" layout="1column">
     <head>
-    	<css src="Godogi_LiveChat::css/dash/livechat.css"/>
-    	<script src="Godogi_LiveChat::js/dash/livechat.js"/>
+    	<css src="Godogi_Livechat::css/dash/livechat.css"/>
+    	<script src="Godogi_Livechat::js/dash/livechat.js"/>
 	</head>
     <body>
     	<referenceContainer name="content">
-		    <block class="Godogi\LiveChat\Block\Dash" name="dash.live.chat" template="Godogi_LiveChat::dash.phtml" />
+		    <block class="Godogi\LiveChat\Block\Dash" name="dash.live.chat" template="Godogi_Livechat::dash.phtml" />
 		</referenceContainer>
     </body>
 </page>

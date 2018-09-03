@@ -1,5 +1,5 @@
 <?php
-namespace Godogi\LiveChat\Model\ResourceModel;
+namespace Godogi\Livechat\Model\ResourceModel;
 class Message extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
 	public function __construct(

@@ -12,7 +12,7 @@
 	</head>
     <body>
     	<referenceContainer name="before.body.end">
-		    <block class="Godogi\LiveChat\Block\Chat" name="live.chat" template="Godogi_LiveChat::chat.phtml" />
+		    <block class="Godogi\LiveChat\Block\Chat" name="live.chat" template="Godogi_Livechat::chat.phtml" />
 		</referenceContainer>
     </body>
 </page>

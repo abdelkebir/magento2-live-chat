@@ -2,6 +2,6 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-        <add id="Godogi_Livechat::index_index" title="Live Chat" translate="title" module="Godogi_Livechat" sortOrder="100" parent="Magento_Backend::marketing_communications" action="livechat/index/index" resource="Godogi_Livechat::livechat"/>
+        <add id="Godogi_LiveChat::index_index" title="Live Chat" translate="title" module="Godogi_LiveChat" sortOrder="100" parent="Magento_Backend::marketing_communications" action="livechat/index/index" resource="Godogi_LiveChat::livechat"/>
     </menu>
 </config>
