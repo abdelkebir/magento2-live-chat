@@ -1,5 +1,5 @@
 <?php
-namespace Godogi\LiveChat\Block;
+namespace Godogi\LiveChat\Block\Adinhtml;
 class Dash extends \Magento\Framework\View\Element\Template
 {
 	public $_storeManager;
@@ -26,4 +26,10 @@ class Dash extends \Magento\Framework\View\Element\Template
 		$livechatCollection->addFieldToFilter('session_id', array('eq' => $sessionId));
 		return $livechatCollection;
 	}
+	public function getFormAdminAction(){
+		return $this->_storeManager->getStore()->getUrl('livechat/message/send');
+	}
+	
+	
+	
 }

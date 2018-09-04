@@ -12,10 +12,10 @@
 	</head>
     <body>
         <referenceContainer name="content">
-            <block class="Godogi\LiveChat\Block\Dash" name="livechat_dash" template="Godogi_LiveChat::dash.phtml"/>
+            <block class="Godogi\LiveChat\Block\Adminhtml\Dash" name="livechat_dash" template="Godogi_LiveChat::dash.phtml"/>
         </referenceContainer>
         <referenceContainer name="left">
-            <block class="Godogi\LiveChat\Block\Dash" name="livechat_tabs" template="Godogi_LiveChat::tabs.phtml"/>
+            <block class="Godogi\LiveChat\Block\Adminhtml\Dash" name="livechat_tabs" template="Godogi_LiveChat::tabs.phtml"/>
         </referenceContainer>
     </body>
 </page>
