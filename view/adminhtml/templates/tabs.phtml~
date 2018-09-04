@@ -1,0 +1,25 @@
+<?php 
+
+	$sessions = $this->getSessions();
+	?>
+	<div class="admin__page-nav ui-tabs ui-livechat ui-livechat-content ui-corner-all" data-role="container" id="livechat_tabs">
+    	<div class="admin__page-nav-title" data-role="title" data-ui-id="livechat-edit-tabs-title">
+        	<strong>Discussions</strong>
+    	</div>
+    	<ul data-ui-id="livechat-instance-edit-tabs-tab-livechat-tabs" class="tabs admin__page-nav-items ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-livechat-header ui-corner-all" role="tablist">
+        <?php 
+        $i =0;
+        foreach ($sessions as $session) {
+				?>
+        		<li class="admin__page-nav-item ui-state-default ui-corner-top ui-tabs-active ui-state-active" data-ui-id="livechat-edit-tabs-tab-item-main-section" role="tab" tabindex="0" aria-controls="livechat_tabs_main_section_content" aria-labelledby="livechat_tabs_main_section" aria-selected="true">
+            	<a href="#livechat_tabs_main_section_content" id="livechat_tabs_main_section" name="main_section" title="Storefront Properties" class="admin__page-nav-link tab-item-link   ui-tabs-anchor" data-tab-type="" data-ui-id="livechat-edit-tabs-tab-link-main-section" role="presentation" tabindex="-1">
+                	<span><?php  echo $session->getSessionId(); ?></span>
+           	 	</a>
+        		</li>
+        		<?php 
+        		$i++;
+			}
+			?>
+    	</ul>
+	</div>
+
