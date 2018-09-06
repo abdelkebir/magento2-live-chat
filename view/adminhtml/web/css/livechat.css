@@ -3,15 +3,16 @@
 	right: 10px;
 	background-color: white;
 	border-radius: 4px 4px 0 0;
-	height: 340px;
+	height: 460px;
 	z-index: 1000;
 	border: 2px solid #C8C8C8;
+	position: relative;
 }
 #lc-livechat #lc-scrollBar {
 	background: #49505a;
 	position: sticky;
 	width: 10px;
-	height: 230px;
+	height: 460px;
 	z-index: 100;
 	top: 0px;
 	left: calc(100% - 10px);
@@ -56,7 +57,7 @@
 }
 #lc-livechat #lc-discussion {
 	padding: 0px;
-	height: 230px;
+	height: 350px;
 	overflow-y: hidden;
 	background-color: #f8f8f8;
 	position: relative;
@@ -110,4 +111,24 @@
 }
 #lc-livechat #lc-discussion::-webkit-scrollbar-thumb:hover,#lc-livechat #lc-discussion::scrollbar-thumb:hover {
     background: #555; 
+}
+
+
+
+/*Admin additions*/
+
+#lc-livechat .loading-mask {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+}
+#lc-livechat .popup-loading::after {
+	left: calc(50% - 32px);
+	margin: 0;
+	top: calc(40% - 32px);
+	display: inline-block;
+}
+#lc-livechat .popup-loading {
+	position: absolute;
+	top: 100px;
 }

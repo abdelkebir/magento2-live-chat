@@ -1,5 +1,5 @@
 <?php
-namespace Godogi\LiveChat\Controller\Message;
+namespace Godogi\LiveChat\Controller\Adminhtml\Message;
 
 class Send extends \Magento\Framework\App\Action\Action
 {
@@ -22,9 +22,9 @@ class Send extends \Magento\Framework\App\Action\Action
 	{
 		$postMessage = $this->getRequest()->getPost();
 		$message = $this->messageModel;
-		$message->setSessionId($this->sessionManager->getSessionId());
+		$message->setSessionId($postMessage['session']);
 		$message->setMessage($postMessage['message']);
-		$message->setIsAdmin(false);
+		$message->setIsAdmin(true);
 		$created = false;
         if($message->save()){
         	return  $this->resultJsonFactory->create()->setData(['created' => true, 'message ID' => $message->getId()]);

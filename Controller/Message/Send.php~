@@ -9,7 +9,7 @@ class Send extends \Magento\Framework\App\Action\Action
 
 	public function __construct(\Magento\Framework\App\Action\Context $context,
 								\Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
-								\Godogi\Livechat\Model\Message  $messageModel,
+								\Godogi\LiveChat\Model\Message  $messageModel,
 								\Magento\Framework\Session\SessionManager $sessionManager)
 	{
 		$this->resultJsonFactory 	= $resultJsonFactory;
@@ -23,8 +23,8 @@ class Send extends \Magento\Framework\App\Action\Action
 		$postMessage = $this->getRequest()->getPost();
 		$message = $this->messageModel;
 		$message->setSessionId($this->sessionManager->getSessionId());
-		$message->setMessage($postMessage['message']);
-		$message->setIsAdmin(0);
+		$message->setMessage($postMessage['session-id']);
+		$message->setIsAdmin(false);
 		$created = false;
         if($message->save()){
         	return  $this->resultJsonFactory->create()->setData(['created' => true, 'message ID' => $message->getId()]);
