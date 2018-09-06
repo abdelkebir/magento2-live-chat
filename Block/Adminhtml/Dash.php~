@@ -1,15 +1,18 @@
 <?php
-namespace Godogi\LiveChat\Block\Adinhtml;
+namespace Godogi\LiveChat\Block\Adminhtml;
 class Dash extends \Magento\Framework\View\Element\Template
 {
-	public $_storeManager;
-	public $_livechatFactory;
+	protected $_storeManager;
+	protected $_livechatFactory;
+	protected $_backendUrl;
 
 	public function __construct(\Magento\Framework\View\Element\Template\Context $context,
 								\Magento\Store\Model\StoreManagerInterface $storeManager,
+								\Magento\Backend\Model\UrlInterface $backendUrl,
 								\Godogi\LiveChat\Model\ResourceModel\Message\CollectionFactory $livechatFactory)
 	{
 		$this->_storeManager = $storeManager;
+		$this->_backendUrl = $backendUrl;
 		$this->_livechatFactory = $livechatFactory;
 		parent::__construct($context);
 	}
@@ -27,9 +30,11 @@ class Dash extends \Magento\Framework\View\Element\Template
 		return $livechatCollection;
 	}
 	public function getFormAdminAction(){
-		return $this->_storeManager->getStore()->getUrl('livechat/message/send');
+		return $this->_backendUrl->getUrl('livechat/message/send');
 	}
-	
+	public function getLoadMessagesAction(){
+		return $this->_storeManager->getStore()->getUrl('livechat/message/load');
+	}
 	
 	
 }

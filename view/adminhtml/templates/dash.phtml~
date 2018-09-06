@@ -1,23 +1,37 @@
-<div id="lc-livechat" class="closed">
+<div id="lc-livechat">
+	<div class="loading-mask" data-role="loader" style="display: none;">
+		<div class="popup popup-loading">
+			<div class="popup-inner">
+				<img alt="Loading..." src="http://127.0.0.1/pub/static/adminhtml/Magento/backend/en_US/images/loader-2.gif">
+				Please wait...
+			</div>
+		</div>
+	</div>
 	<div class="title">
 		<?php echo __('Contact Us'); ?>
 	</div>
 	<div id="lc-discussion">
 		<div id="lc-livedisc"></div>
 	</div>
-	<form id="lc-livechatform" action="<?php echo $this->getFormActionAdmin(); ?>" type="post">
+	<form id="lc-livechatform" action="<?php echo $this->getFormAdminAction(); ?>" type="post">
 		<textarea id="lc-message" name="message" placeholder="<?php echo __('Type and press [enter]'); ?>"></textarea> 
+		<input type="hidden" name="session" id="livechat-session-id" />
 	</form>
 </div>
 <script type="text/javascript">
 	require(['jquery'], function($){ 
-     	$('#lc-livechat .title').click(function(){
-     		if($('#lc-livechat').hasClass('closed')){
-     			$('#lc-livechat').removeClass('closed');
-     		}else{
-     			$('#lc-livechat').addClass('closed');
-     		}
-     	})
+	
+		/* ********************* Loading Discussion ******************* */
+		
+		if($('ul#livechat_tabs_ul li').length >= 1){
+			$('#lc-livechat .loading-mask').show();
+			var sessionId = $('ul#livechat_tabs_ul li').first().attr('data-session-id');
+			$('#livechat-session-id').val(sessionId);
+			loadMessages();
+		}
+		/**/
+		
+		
      	$('#lc-message').keypress(function (e) {
 		  	if (e.which == 13) {
 		    	$('#lc-livechatform').submit();
@@ -25,31 +39,60 @@
 		  	}
 		});
      	$("#lc-livechatform").submit(function(e) {
-		    var url = "<?php echo $this->getFormAction(); ?>";
+		    var url = "<?php echo $this->getFormAdminAction(); ?>";
 		    $.ajax({
 	           	type: "POST",
 	           	url: url,
 	           	data: $("#lc-livechatform").serialize(),
 	           	success: function(data){
 	           		var message = $('#lc-message').val();
-	           		$('#lc-livedisc').append('<div class="message customer">'+message+'</div>');
+	           		$('#lc-livedisc').append('<div class="message admin">'+message+'</div>');
 	           		$('#lc-message').val('');
 	           		$('#lc-livedisc').animate({bottom: 0});
 	           		changeProportions();
 	           		console.log('Success!');
-	               	console.log(data);
 	           	},
 	            error: function (data) {
 	                console.log('An error occurred.');
-	                console.log(data);
 	            }
 		    });
 		    e.preventDefault();
 		});
+		function loadMessages(){
+			var url = "<?php echo $this->getLoadMessagesAction(); ?>";
+			var className = "";
+			var messageS = "";
+			var html = ""
+			console.log($('#livechat-session-id').val());
+		   $.ajax({
+	           	type: "POST",
+	           	url: url,
+	           	data: {'session-id': $('#livechat-session-id').val()},
+	           	success: function(data){
+	           		for (var i = 0; i < data.length; i++) {
+   						 if(data[i].is_admin){
+   						 		className = "admin";
+   						 }else {
+   						 		className = "customer";
+   						 }
+   						 messageS = data[i].message;
+   						 html = '<div class="message '+ className +'">'+ messageS +'</div>';
+   						 $('#lc-livedisc').append(html);
+   						 console.log(className);
+   						 
+						}
+	           		console.log('Success!');
+	               $('#lc-livechat .loading-mask').hide();
+	           	},
+	            error: function (data) {
+	                console.log('An error occurred.');
+	            }
+		   });
+		}
 		function changeProportions(){
 			var L = $('#lc-livedisc').height();
-			var l = 230;
-			var H = 230;
+			var l = 350;
+			var H = 350;
 			var h = 0;
 			var p = L / l; //   p = Proportion
 			if (p <= 1){
@@ -75,15 +118,15 @@
 						    var lcSliderHeight = document.getElementById('lc-slider').clientHeight;
 
 						    var L = $('#lc-livedisc').height();
-							var l = 230;
+							var l = 350;
 							var diffL = L -l;
 
 						    if((lcSliderHeight/2) >= difference){  // top
 						    	$('#lc-slider').css('top', 0 + 'px');
 						    	$('#lc-livedisc').css('bottom', '-' + diffL + 'px');
 						    	console.log( '-' + diffL + 'px');
-						    }else if((230 - (lcSliderHeight/2)) <= difference){  //bottom
-						    	$('#lc-slider').css('top', (230 - lcSliderHeight) + 'px');
+						    }else if((350 - (lcSliderHeight/2)) <= difference){  //bottom
+						    	$('#lc-slider').css('top', (350 - lcSliderHeight) + 'px');
 						    	$('#lc-livedisc').css('bottom', 0 + 'px');
 						    	console.log( 0 + 'px');
 						    }else{ // middle
@@ -103,8 +146,8 @@
 		}
 		function setAppropriateScrollbarHeight(){
 			var L = $('#lc-livedisc').height();
-			var l = 230;
-			var H = 230;
+			var l = 350;
+			var H = 350;
 			var h = 0;
 			h = (H*l)/L;
 			if(h < 10){
