@@ -1,5 +1,6 @@
 <?php
 namespace Godogi\LiveChat\Controller\Message;
+use Magento\Framework\Controller\ResultFactory;
 
 class Load extends \Magento\Framework\App\Action\Action
 {
@@ -24,12 +25,11 @@ class Load extends \Magento\Framework\App\Action\Action
 	public function execute()
 	{
 		$postMessage = $this->getRequest()->getPost();
-		
 		$collection = $this->messageCollectionFactory->create();
 		$collection->addFieldToFilter('session_id', array('eq' => $postMessage['session-id']));
 		$collection->setOrder('created_at','ASC');
-		$result = $this->resultJsonFactory->create();
-		$result->setData($collection->getData());
-		return  $result;
+		$resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
+      $resultJson->setData($collection->getData());
+     	return $resultJson;
 	}
 }

@@ -19,8 +19,17 @@
 	</form>
 </div>
 <script type="text/javascript">
-	require(['jquery'], function($){ 
-	
+	require(['jquery', 'domReady!'], function($){ 
+		/* Tab click event*/
+		$('#livechat_tabs_ul li').click(function(){
+			$('#livechat_tabs_ul li').removeClass('ui-tabs-active ui-state-active');
+			$(this).addClass('ui-tabs-active ui-state-active');
+			var sessionId = $(this).attr('data-session-id');
+			$('#livechat-session-id').val(sessionId);
+			$('#lc-livedisc').empty();
+			$('#lc-livechat .loading-mask').show();
+		})
+		/**/
 		/* ********************* Loading Discussion ******************* */
 		
 		if($('ul#livechat_tabs_ul li').length >= 1){
@@ -46,7 +55,7 @@
 	           	data: $("#lc-livechatform").serialize(),
 	           	success: function(data){
 	           		var message = $('#lc-message').val();
-	           		$('#lc-livedisc').append('<div class="message admin">'+message+'</div>');
+	           		$('#lc-livedisc').append('<div class="lc-message admin">'+message+'</div>');
 	           		$('#lc-message').val('');
 	           		$('#lc-livedisc').animate({bottom: 0});
 	           		changeProportions();
@@ -59,7 +68,7 @@
 		    e.preventDefault();
 		});
 		function loadMessages(){
-			var url = "<?php echo $this->getLoadMessagesAction(); ?>";
+			var url = "/livechat/message/load";
 			var className = "";
 			var messageS = "";
 			var html = ""
@@ -70,18 +79,22 @@
 	           	data: {'session-id': $('#livechat-session-id').val()},
 	           	success: function(data){
 	           		for (var i = 0; i < data.length; i++) {
-   						 if(data[i].is_admin){
+	           			console.log(data[i].message);
+	           			
+   						 if(data[i].is_admin == 1){
    						 		className = "admin";
    						 }else {
    						 		className = "customer";
    						 }
    						 messageS = data[i].message;
-   						 html = '<div class="message '+ className +'">'+ messageS +'</div>';
+   						 html = '<div class="lc-message '+ className +'">'+ messageS +'</div>';
    						 $('#lc-livedisc').append(html);
    						 console.log(className);
+   						 changeProportions();
    						 
 						}
 	           		console.log('Success!');
+	           		console.log(data);
 	               $('#lc-livechat .loading-mask').hide();
 	           	},
 	            error: function (data) {
