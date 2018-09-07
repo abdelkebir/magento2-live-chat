@@ -12,7 +12,7 @@
 	background: #49505a;
 	position: sticky;
 	width: 10px;
-	height: 230px;
+	height: 460px;
 	z-index: 100;
 	top: 0px;
 	left: calc(100% - 10px);
@@ -39,15 +39,6 @@
 #lc-livechat.closed {
 	bottom: -302px;
 }
-#lc-livechat .title::after {
-	font-size: 22px;
-	line-height: 22px;
-	color: #757575;
-	content: '\e622';
-	font-family: 'luma-icons';
-	display: inline-block;
-	float: right;
-}
 #lc-livechat.closed .title::after {
 	content: '\e621';
 }
@@ -62,22 +53,27 @@
 	background-color: #f8f8f8;
 	position: relative;
 }
-#lc-livechat .message.customer {
+#lc-livechat .lc-message.customer, #lc-livechat .lc-message.admin {
 	padding: 4px 10px;
 }
-#lc-livechat #lc-livedisc .message.customer {
+#lc-livechat #lc-livedisc .lc-message.customer {
+	border: 1px solid #77a0c7;
 	background-color: #77a0c7;
-	margin: 4px 20px 4px 0;
-	border-radius: 0 14px 14px;
+	margin: 4px 60px 25px 10px;
+	border-radius: 0 14px 14px 14px;
 	color: white;
 	font-size: 14px;
 	font-weight: 600;
 	overflow-wrap: break-word;
 }
-#lc-livechat #lc-livedisc .message.admin{
+#lc-livechat #lc-livedisc .lc-message.admin{
 	border: 1px solid #ffb3ff;
 	background-color: #ffccff;
-	margin: 4px 0px 4px 20;
+	margin: 4px 20px 25px 60px;
+	border-radius: 14px 0 14px 14px;
+	font-size: 14px;
+	font-weight: 600;
+	overflow-wrap: break-word;
 }
 #lc-livechat #lc-livechatform {
 	bottom: 0;

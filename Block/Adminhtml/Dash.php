@@ -5,15 +5,18 @@ class Dash extends \Magento\Framework\View\Element\Template
 	protected $_storeManager;
 	protected $_livechatFactory;
 	protected $_backendUrl;
+	protected $_urlInterface;
 
 	public function __construct(\Magento\Framework\View\Element\Template\Context $context,
 								\Magento\Store\Model\StoreManagerInterface $storeManager,
 								\Magento\Backend\Model\UrlInterface $backendUrl,
-								\Godogi\LiveChat\Model\ResourceModel\Message\CollectionFactory $livechatFactory)
+								\Godogi\LiveChat\Model\ResourceModel\Message\CollectionFactory $livechatFactory,
+								\Magento\Framework\UrlInterface $urlInterface)
 	{
 		$this->_storeManager = $storeManager;
 		$this->_backendUrl = $backendUrl;
 		$this->_livechatFactory = $livechatFactory;
+		$this->_urlInterface = $urlInterface;
 		parent::__construct($context);
 	}
 
@@ -32,9 +35,5 @@ class Dash extends \Magento\Framework\View\Element\Template
 	public function getFormAdminAction(){
 		return $this->_backendUrl->getUrl('livechat/message/send');
 	}
-	public function getLoadMessagesAction(){
-		return $this->_storeManager->getStore()->getUrl('livechat/message/load');
-	}
-	
 	
 }
