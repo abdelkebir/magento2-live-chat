@@ -63,22 +63,25 @@
 	background-color: #f8f8f8;
 	position: relative;
 }
-#lc-livechat .message.customer {
+#lc-livechat .message.customer,#lc-livechat .message.admin {
 	padding: 4px 10px;
 }
 #lc-livechat #lc-livedisc .message.customer {
 	background-color: #77a0c7;
 	margin: 4px 20px 4px 0;
-	border-radius: 0 14px 14px;
+	border-radius: 0 14px 14px 14px;
 	color: white;
 	font-size: 14px;
 	font-weight: 600;
 	overflow-wrap: break-word;
 }
 #lc-livechat #lc-livedisc .message.admin{
-	border: 1px solid #ffb3ff;
 	background-color: #ffccff;
-	margin: 4px 0px 4px 20;
+	margin: 4px 0px 4px 20px;
+	border-radius: 14px 0 14px 14px;
+	font-size: 14px;
+	font-weight: 600;
+	overflow-wrap: break-word;
 }
 
 #lc-livechat #lc-livechatform{
@@ -110,4 +113,34 @@
 }
 #lc-livechat #lc-discussion::-webkit-scrollbar-thumb:hover,#lc-livechat #lc-discussion::scrollbar-thumb:hover {
     background: #555; 
+}
+.lc-loader-block {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(255,255,255,0.8);
+	z-index: 1000;
+}
+.lc-loader {
+	border: 4px solid #575757;
+	border-radius: 50%;
+	border-top: 4px solid #ffffff;
+	width: 40px;
+	height: 40px;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
+	top: calc(50% - 20px);
+	position: relative;
+	left: calc(50% - 20px);
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
