@@ -123,7 +123,7 @@
 						scrollClicked = true;
 						$('#lc-slider').addClass('grabbing');
 					});
-					$("#lc-scrollBar").mousemove(function(e){
+					$("body").mousemove(function(e){
 						isDragging = true;
 						if(isDragging && scrollClicked){
 					        var cursorY = e.clientY || window.event.clientY;
@@ -150,7 +150,7 @@
 						    }
 						}
 				    });
-				    $("#lc-scrollBar").mouseup(function() {
+				    $("body").mouseup(function() {
 					    isDragging = false;
 					    scrollClicked = false;
 					    $('#lc-slider').removeClass('grabbing');

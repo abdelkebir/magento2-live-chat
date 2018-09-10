@@ -1,16 +1,27 @@
 <div id="lc-livechat" class="closed">
+	<div class="lc-loader-block"  style="display: none;">
+		<div class="lc-loader"></div>
+	</div>
 	<div class="title">
 		<?php echo __('Contact Us'); ?>
 	</div>
 	<div id="lc-discussion">
-		<div id="lc-livedisc"></div>
+		<div id="lc-livedisc">
+			
+		</div>
 	</div>
 	<form id="lc-livechatform" action="<?php echo $this->getFormAction(); ?>" type="post">
+		<input type="hidden" name="session" id="livechat-session-id" value="<?php echo $this->getSessionId(); ?>"/>
 		<textarea id="lc-message" name="message" placeholder="<?php echo __('Type and press [enter]'); ?>"></textarea> 
 	</form>
 </div>
 <script type="text/javascript">
 	require(['jquery'], function($){ 
+	
+		/* ********************* Loading Discussion ******************* */
+		loadMessages();
+		/**/
+		
      	$('#lc-livechat .title').click(function(){
      		if($('#lc-livechat').hasClass('closed')){
      			$('#lc-livechat').removeClass('closed');
@@ -46,6 +57,41 @@
 		    });
 		    e.preventDefault();
 		});
+		function loadMessages(){
+			var url = "/livechat/message/load";
+			var className = "";
+			var messageS = "";
+			var html = ""
+			console.log($('#livechat-session-id').val());
+		   $.ajax({
+	           	type: "POST",
+	           	url: url,
+	           	data: {'session-id': $('#livechat-session-id').val()},
+	           	success: function(data){
+	           		for (var i = 0; i < data.length; i++) {
+	           			console.log(data[i].message);
+	           			
+   						 if(data[i].is_admin == 1){
+   						 		className = "admin";
+   						 }else {
+   						 		className = "customer";
+   						 }
+   						 messageS = data[i].message;
+   						 html = '<div class="message '+ className +'">'+ messageS +'</div>';
+   						 $('#lc-livedisc').append(html);
+   						 console.log(className);
+   						 changeProportions();
+   						 
+						}
+	           		console.log('Success!');
+	           		console.log(data);
+	               $('#lc-livechat .loading-mask').hide();
+	           	},
+	            error: function (data) {
+	                console.log('An error occurred.');
+	            }
+		   });
+		}
 		function changeProportions(){
 			var L = $('#lc-livedisc').height();
 			var l = 230;
@@ -66,7 +112,7 @@
 						scrollClicked = true;
 						$('#lc-slider').addClass('grabbing');
 					});
-					$("#lc-scrollBar").mousemove(function(e){
+					$("body").mousemove(function(e){
 						isDragging = true;
 						if(isDragging && scrollClicked){
 					        var cursorY = e.clientY || window.event.clientY;
@@ -93,7 +139,7 @@
 						    }
 						}
 				    });
-				    $("#lc-scrollBar").mouseup(function() {
+				    $("body").mouseup(function() {
 					    isDragging = false;
 					    scrollClicked = false;
 					    $('#lc-slider').removeClass('grabbing');

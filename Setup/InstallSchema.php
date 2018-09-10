@@ -36,12 +36,18 @@ class InstallSchema implements InstallSchemaInterface
 	        null,
 	        ['nullable' => false, 'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT],
 	        'Created At'
-	    )->addColumn(
+	     )->addColumn(
             'is_admin',
             \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
             null,
             ['nullable' => false],
             'Is Admin?'
+        )->addColumn(
+            'seen',
+            \Magento\Framework\DB\Ddl\Table::TYPE_BOOLEAN,
+            null,
+            ['nullable' => false],
+            'ALready Seen?'
         )->setComment(
             'LiveChat Messages'
         );
