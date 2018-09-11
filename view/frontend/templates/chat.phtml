@@ -7,7 +7,6 @@
 	</div>
 	<div id="lc-discussion">
 		<div id="lc-livedisc">
-			
 		</div>
 	</div>
 	<form id="lc-livechatform" action="<?php echo $this->getFormAction(); ?>" type="post">
@@ -17,11 +16,9 @@
 </div>
 <script type="text/javascript">
 	require(['jquery'], function($){ 
-	
 		/* ********************* Loading Discussion ******************* */
-		loadMessages();
+		loadMessages('all');
 		/**/
-		
      	$('#lc-livechat .title').click(function(){
      		if($('#lc-livechat').hasClass('closed')){
      			$('#lc-livechat').removeClass('closed');
@@ -35,6 +32,9 @@
 		    	return false;
 		  	}
 		});
+		var checkForNewMessages = setInterval(function () {
+			loadMessages('unread');
+		}, 1000);
      	$("#lc-livechatform").submit(function(e) {
 		    var url = "<?php echo $this->getFormAction(); ?>";
 		    $.ajax({
@@ -57,7 +57,7 @@
 		    });
 		    e.preventDefault();
 		});
-		function loadMessages(){
+		function loadMessages( m ){ /*  Load all or only unread messages  */
 			var url = "/livechat/message/load";
 			var className = "";
 			var messageS = "";
@@ -66,11 +66,9 @@
 		   $.ajax({
 	           	type: "POST",
 	           	url: url,
-	           	data: {'session-id': $('#livechat-session-id').val()},
+	           	data: {'session-id': $('#livechat-session-id').val(), 'm':m},
 	           	success: function(data){
 	           		for (var i = 0; i < data.length; i++) {
-	           			console.log(data[i].message);
-	           			
    						 if(data[i].is_admin == 1){
    						 		className = "admin";
    						 }else {
@@ -161,5 +159,7 @@
 				$('#lc-slider').css('top', (H-h) + 'px');
 			}
 		}
+		
+		
  	});
 </script>

@@ -3,7 +3,7 @@ namespace Godogi\LiveChat\Controller\Adminhtml\Message;
 
 class Send extends \Magento\Framework\App\Action\Action
 {
-	protected $resultJsonFactory; 
+	protected $resultJsonFactory;
 	protected $messageModel;
 	protected $sessionManager;
 
@@ -26,10 +26,10 @@ class Send extends \Magento\Framework\App\Action\Action
 		$message->setMessage($postMessage['message']);
 		$message->setIsAdmin(true);
 		$created = false;
-        if($message->save()){
+      if($message->save()){
         	return  $this->resultJsonFactory->create()->setData(['created' => true, 'message ID' => $message->getId()]);
-        }else{
+      }else{
         	return  $this->resultJsonFactory->create()->setData(['created' => false]);
-        }
+      }
 	}
 }
