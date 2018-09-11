@@ -25,6 +25,7 @@ class Send extends \Magento\Framework\App\Action\Action
 		$message->setSessionId($this->sessionManager->getSessionId());
 		$message->setMessage($postMessage['message']);
 		$message->setIsAdmin(false);
+		$message->setSeen(false);
 		$created = false;
         if($message->save()){
         	return  $this->resultJsonFactory->create()->setData(['created' => true, 'message ID' => $message->getId()]);
