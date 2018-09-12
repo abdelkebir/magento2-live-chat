@@ -27,23 +27,22 @@ class Load extends \Magento\Framework\App\Action\Action
 		$postMessage = $this->getRequest()->getPost();
 		$collection = $this->messageCollectionFactory->create();
 		$collection->addFieldToFilter('session_id', array('eq' => $postMessage['session-id']));
-		
 		$m = $postMessage['m'];
-		
 		if($m == 'all'){
 		}elseif($m == 'unread'){
 			$collection->addFieldToFilter('is_admin', false);
 			$collection->addFieldToFilter('seen', false);
 		}
 		$collection->setOrder('created_at','ASC');
+		$resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
+      $resultJson->setData($collection->getData());
+      
 		foreach($collection as $message){
 			$messageN = $this->messageModel;
 			$messageN->load($message->getMessageId());
 			$messageN->setSeen(true);
         	$messageN->save();
 		}
-		$resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
-      $resultJson->setData($collection->getData());
      	return $resultJson;
 	}
 }

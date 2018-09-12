@@ -27,10 +27,7 @@ class Load extends \Magento\Framework\App\Action\Action
 		$postMessage = $this->getRequest()->getPost();
 		$collection = $this->messageCollectionFactory->create();
 		$collection->addFieldToFilter('session_id', array('eq' => $postMessage['session-id']));
-		
 		$m = $postMessage['m'];
-		
-		
 		if($m == 'all'){
 		}elseif($m == 'unread'){
 			$collection->addFieldToFilter('is_admin', true);

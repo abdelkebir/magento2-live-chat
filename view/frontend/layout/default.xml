@@ -8,7 +8,6 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
     	<css src="Godogi_LiveChat::css/livechat.css"/>
-    	<script src="Godogi_LiveChat::js/livechat.js"/>
 	</head>
     <body>
     	<referenceContainer name="before.body.end">

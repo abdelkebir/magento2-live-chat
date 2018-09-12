@@ -32,9 +32,11 @@
 		    	return false;
 		  	}
 		});
+		/* Live coming messages */
 		var checkForNewMessages = setInterval(function () {
 			loadMessages('unread');
 		}, 1000);
+		/*  */
      	$("#lc-livechatform").submit(function(e) {
 		    var url = "<?php echo $this->getFormAction(); ?>";
 		    $.ajax({
@@ -47,12 +49,9 @@
 	           		$('#lc-message').val('');
 	           		$('#lc-livedisc').animate({bottom: 0});
 	           		changeProportions();
-	           		console.log('Success!');
-	               	console.log(data);
 	           	},
 	            error: function (data) {
 	                console.log('An error occurred.');
-	                console.log(data);
 	            }
 		    });
 		    e.preventDefault();
@@ -62,7 +61,6 @@
 			var className = "";
 			var messageS = "";
 			var html = ""
-			console.log($('#livechat-session-id').val());
 		   $.ajax({
 	           	type: "POST",
 	           	url: url,
@@ -77,12 +75,9 @@
    						 messageS = data[i].message;
    						 html = '<div class="message '+ className +'">'+ messageS +'</div>';
    						 $('#lc-livedisc').append(html);
-   						 console.log(className);
    						 changeProportions();
    						 
 						}
-	           		console.log('Success!');
-	           		console.log(data);
 	               $('#lc-livechat .loading-mask').hide();
 	           	},
 	            error: function (data) {
@@ -125,15 +120,12 @@
 						    if((lcSliderHeight/2) >= difference){  // top
 						    	$('#lc-slider').css('top', 0 + 'px');
 						    	$('#lc-livedisc').css('bottom', '-' + diffL + 'px');
-						    	console.log( '-' + diffL + 'px');
 						    }else if((230 - (lcSliderHeight/2)) <= difference){  //bottom
 						    	$('#lc-slider').css('top', (230 - lcSliderHeight) + 'px');
 						    	$('#lc-livedisc').css('bottom', 0 + 'px');
-						    	console.log( 0 + 'px');
 						    }else{ // middle
 						    	$('#lc-slider').css('top', (difference - (lcSliderHeight/2))  + 'px');
 						    	$('#lc-livedisc').css('bottom', '-' + (L-(l/2)-(L*(difference/l))) + 'px');
-						    	console.log( '-' + (L-(l/2)-(L*(difference/l))) + 'px');
 						    }
 						}
 				    });
