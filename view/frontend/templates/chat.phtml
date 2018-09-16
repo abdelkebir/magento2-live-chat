@@ -15,7 +15,7 @@
 	</form>
 </div>
 <script type="text/javascript">
-	require(['jquery'], function($){ 
+	require(['jquery', 'domReady!'], function($){
 		/* ********************* Loading Discussion ******************* */
 		loadMessages('all');
 		/**/
@@ -38,6 +38,7 @@
 		}, 1000);
 		/*  */
      	$("#lc-livechatform").submit(function(e) {
+     		 $('.lc-loader-block').show();
 		    var url = "<?php echo $this->getFormAction(); ?>";
 		    $.ajax({
 	           	type: "POST",
@@ -49,6 +50,7 @@
 	           		$('#lc-message').val('');
 	           		$('#lc-livedisc').animate({bottom: 0});
 	           		changeProportions();
+	           		$('.lc-loader-block').hide();
 	           	},
 	            error: function (data) {
 	                console.log('An error occurred.');
