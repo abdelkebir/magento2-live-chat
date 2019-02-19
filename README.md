@@ -13,8 +13,6 @@ The Simplest Magento 2 Live Chat Module.
 
 4. bin/magento setup:di:compile
 
-If using OpCache, please clear cache.
-
 
 ## Compatibility
 
